@@ -1,0 +1,242 @@
+@font-family: 'Inter', sans-serif;
+@primary-gradient-start: #5a057a;
+@primary-gradient-end: #8416ac;
+@background-color: black;
+
+@box-start-color: transparent;
+@box-end-color:  fade(@background-color, 100%);
+
+@small-screen: 480px;
+@medium-screen: 768px;
+@large-screen: 1024px;
+
+@base-button-font-size: 16px;
+@base-button-padding: 10px 20px;
+
+@base-h1-font-size: 24px; 
+@base-p-font-size: 16px; 
+
+// Mixin for responsive text
+.responsive-text(@element, @font-size) {
+  @{element} {
+    font-size: @font-size;
+  }
+}
+
+// Mixin for responsive button
+.responsive-button(@font-size, @padding) {
+  font-size: @font-size;
+  padding: @padding;
+}
+
+
+
+// Mixin for button styles
+.button-style() {
+    background-image: linear-gradient(to right, @primary-gradient-start, @primary-gradient-end);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    // Base responsive styles
+  .responsive-button(@base-button-font-size, @base-button-padding);
+  
+  // Adjustments for small screens
+  @media (max-width: @small-screen) {
+    .responsive-button(12px, 8px 16px);
+  }
+
+  // Adjustments for medium screens
+  @media (min-width: @small-screen) and (max-width: @medium-screen) {
+    .responsive-button(14px, 10px 20px);
+  }
+
+  // Adjustments for large screens
+  @media (min-width: @medium-screen) and (max-width: @large-screen) {
+    .responsive-button(16px, 12px 24px);
+  }
+
+  // Extra large screens
+  @media (min-width: @large-screen) {
+    .responsive-button(18px, 15px 30px);
+  }
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    background: no-repeat center center fixed; 
+    background-color: @background-color;
+    background-size: cover;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+body {
+    font-family: @font-family;
+    background-image: url('./images/Hero-Image.jpg');
+    background-size: contain;
+    background-position: center center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+
+    .container {
+        text-align: center;
+        color: white;
+        display: flex;
+        height: 90%;
+        padding-top: 10%;
+        background: linear-gradient(to bottom, @box-start-color,@box-start-color, @box-end-color);
+        flex-direction: column-reverse;
+        min-height: 100vh;
+        flex-grow: 1;
+        bottom: 0;
+    }
+
+    .text-container {
+        background-color: black;
+        padding: 2% 40%;
+        flex-wrap: wrap-reverse;
+        background: linear-gradient(to bottom, @box-start-color, @box-end-color);
+        overflow: auto; 
+        position: relative;
+        font-weight: bold;
+
+        h1 {
+            .responsive-text(h1, @base-h1-font-size);
+        }
+        p {
+            .responsive-text(p, @base-p-font-size);
+        }
+    
+        // Adjustments for small screens
+        @media (max-width: @small-screen) {
+            .responsive-text(h1, 18px);
+            .responsive-text(p, 12px);
+        }
+    
+        // Adjustments for medium screens
+        @media (min-width: @small-screen) and (max-width: @medium-screen) {
+            .responsive-text(h1, 24px);
+            .responsive-text(p, 16px);
+        }
+    
+        // Adjustments for large screens
+        @media (min-width: @medium-screen) and (max-width: @large-screen) {
+            .responsive-text(h1, 30px);
+            .responsive-text(p, 20px);
+        }
+    
+        // Extra large screens
+        @media (min-width: @large-screen) {
+            .responsive-text(h1, 36px);
+            .responsive-text(p, 24px);
+        }
+    }
+}
+
+#content {
+    text-align: center;
+}
+
+button {
+    .button-style();
+}
+
+.register-btn, .signUp-btn {
+    .button-style();
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 10%;
+    padding: 0.5%;
+    z-index: 1000;
+    background-color: @background-color;
+    overflow: hidden;
+
+
+    .user-profile {
+        float: right;
+
+        .user-profile-container {
+            width: 15%;
+            height: 2%;
+            float: right;
+            padding: 14px 16px;
+            margin-left: 20px;
+            margin-right: 20px;
+
+            
+        }
+        .userProfile {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .register-btn {
+            padding: 10px 35px;
+            float: right;
+        }
+    }
+}
+
+.logo-container {
+    width: 15%;
+    height: 2%;
+    float: left;
+    padding: 14px 16px;
+
+    .logo {
+    width: 100%;
+    float: left;
+}
+}
+
+.signUp-btn {
+    padding: 15px 50px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+
+    .user-profile img, .logo  {
+        width: auto 100%;
+    }
+
+    
+}
+
+@media (orientation: landscape), (orientation: portrait) {
+    body {
+        background-size: auto 100%;
+    }
+
+    header {
+        padding: 0.25% 0.5%;
+        height: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        background-size: 100% auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .text-container {
+        height: auto; 
+    }
+}
